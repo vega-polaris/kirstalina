@@ -18,7 +18,8 @@ const User = db.define('user', {
   },
   balance: {
     type: Sequelize.INTEGER,
-    allowNull: false
+    allowNull: false,
+    defaultValue: 500000
   },
   salt: {
     type: Sequelize.STRING,
