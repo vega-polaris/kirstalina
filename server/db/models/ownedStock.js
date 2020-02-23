@@ -2,10 +2,6 @@ const Sequelize = require('sequelize');
 const db = require('../db');
 
 const OwnedStock = db.define('transaction', {
-  ticker: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
   amount: {
     type: Sequelize.NUMBER,
     defaultValue: 1
@@ -15,3 +11,5 @@ const OwnedStock = db.define('transaction', {
     allowNull: false
   }
 });
+
+module.exports = OwnedStock;
