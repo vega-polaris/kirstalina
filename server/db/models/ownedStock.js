@@ -1,10 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const Transaction = db.define('transaction', {
-  action: {
-    type: Sequelize.ENUM('BUY', 'SELL')
-  },
+const OwnedStock = db.define('transaction', {
   ticker: {
     type: Sequelize.STRING,
     allowNull: false
@@ -13,10 +10,8 @@ const Transaction = db.define('transaction', {
     type: Sequelize.NUMBER,
     defaultValue: 1
   },
-  paidPerShare: {
+  curPrice: {
     type: Sequelize.INTEGER,
     allowNull: false
   }
 });
-
-module.exports = Transaction;
