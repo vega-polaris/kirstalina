@@ -1,19 +1,11 @@
 import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import {Tab} from '@material-ui/core';
-
-// const useStyles = makeStyles({
-//   table: {
-//     minWidth: 650,
-//   },
-// });
+import SingleTransaction from './singleTransaction';
 
 const transactionsDummy = [
   {action: 'SELL', amount: 2, paidPerShare: 6000, ticker: 'AAPL'},
@@ -52,16 +44,7 @@ export default class TransactionsWrapper extends React.Component {
           </TableHead>
           <TableBody>
             {transactionsDummy.map((row, idx) => (
-              <TableRow key={idx}>
-                <TableCell component="th" scope="row">
-                  {row.ticker}
-                </TableCell>
-                <TableCell align="right">{row.action}</TableCell>
-                <TableCell align="right">{row.amount}</TableCell>
-                <TableCell align="right">
-                  {row.paidPerShare * 0.001 * row.amount}
-                </TableCell>
-              </TableRow>
+              <SingleTransaction key={idx} row={row} />
             ))}
           </TableBody>
         </Table>
@@ -70,13 +53,3 @@ export default class TransactionsWrapper extends React.Component {
     );
   }
 }
-
-/*
-
-
-<div className="transactions-div-wrapper">
-          {transactionsDummy.map((transaction, index) => (
-            <div>transaction {index}</div>
-          ))}
-        </div>
-      */
