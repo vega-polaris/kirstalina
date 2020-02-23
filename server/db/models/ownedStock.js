@@ -3,7 +3,7 @@ const db = require('../db');
 
 const OwnedStock = db.define('transaction', {
   amount: {
-    type: Sequelize.NUMBER,
+    type: Sequelize.INTEGER,
     defaultValue: 1
   },
   curPrice: {

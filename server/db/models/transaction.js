@@ -6,7 +6,7 @@ const Transaction = db.define('transaction', {
     type: Sequelize.ENUM('BUY', 'SELL')
   },
   amount: {
-    type: Sequelize.NUMBER,
+    type: Sequelize.INTEGER,
     defaultValue: 1
   },
   paidPerShare: {
