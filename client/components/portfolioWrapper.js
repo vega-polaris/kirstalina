@@ -5,11 +5,12 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import SinglePortfolioRow from './singlePortfolioRow';
+import BuyStocksWrapper from './buyStocksWrapper';
 
 const portfolioDummy = [
-  {amount: 2, curPrice: 6000, ticker: 'AAPL'},
-  {amount: 5, curPrice: 5000, ticker: 'MSFT'},
-  {amount: 37, curPrice: 7800, ticker: 'GOOGL'}
+  { amount: 2, curPrice: 6000, ticker: 'AAPL' },
+  { amount: 5, curPrice: 5000, ticker: 'MSFT' },
+  { amount: 37, curPrice: 7800, ticker: 'GOOGL' }
 ];
 /**
  * COMPONENT
@@ -28,7 +29,10 @@ export default class PortfolioWrapper extends React.Component {
       }
     };
     return (
-      <div id="portfolio-list-wrapper">
+      <div id="portfolio-page-wrapper">
+        <div id="buy-stocks-placeholder">
+          <BuyStocksWrapper />
+        </div>
         <div id="portfolio-list-header">
           <h1>Portfolio</h1>
         </div>
@@ -51,9 +55,3 @@ export default class PortfolioWrapper extends React.Component {
     );
   }
 }
-
-/*
-            {portfolioDummy.map((row, idx) => (
-              <SingleTransaction key={idx} row={row} />
-            ))}
-            */

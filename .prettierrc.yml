@@ -2,9 +2,9 @@
 # tabWidth: 2 # 2
 # useTabs: false # false
 semi: true # false
-singleQuote: true # false
+singleQuote: false
 # trailingComma: none # none | es5 | all
-bracketSpacing: false # true
+bracketSpacing: true # false
 # jsxBracketSameLine: false # false
 arrowParens: avoid # avoid | always
 
