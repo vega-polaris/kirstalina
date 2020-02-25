@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const CurStocks = db.define('curStockPrice', {
+const CurStockPrice = db.define('curStockPrice', {
   ticker: {
     type: Sequelize.STRING,
     allowNull: false
@@ -10,9 +10,10 @@ const CurStocks = db.define('curStockPrice', {
     type: Sequelize.INTEGER,
     allowNull: false
   },
-  numAvail: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    defaultValue: 0
+  companyName: {
+    type: Sequelize.STRING,
+    allowNull: false
   }
 });
+
+module.exports = CurStockPrice;
