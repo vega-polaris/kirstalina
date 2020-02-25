@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const {spawn} = require('child_process');
+const { spawn } = require('child_process');
 const fs = require('fs');
 
 const axios = require('axios');
@@ -16,7 +16,7 @@ const idempotenceMessage = `It appears that your token has been encrypted.
 To run this script again, delete the \`before_deploy\` and \`deploy\` keys
 from the .travis.yml file.`;
 
-const successMessage = `Complete! Run \`git diff .travis.yml\` to check.`;
+const successMessage = 'Complete! Run `git diff .travis.yml` to check.';
 
 /* Clean up system state changes. */
 const clean = () => {
@@ -33,7 +33,7 @@ const getRemoteURL = (name, remotes) => {
   } catch (err) {
     console.log(
       `It appears that the remote ${name} does not exist.`,
-      `Here is the full error:`,
+      'Here is the full error:',
       err
     );
   }
@@ -104,7 +104,7 @@ const updateTravisYAML = (app, key) => {
       skip_cleanup: true, //eslint-disable-line
       provider: 'heroku',
       app: app,
-      api_key: {secure: key} //eslint-disable-line
+      api_key: { secure: key } //eslint-disable-line
     })
   );
   doc.contents.items
@@ -124,7 +124,7 @@ const updateTravisYAML = (app, key) => {
 
 const main = async () => {
   const verbose = process.argv.hasOwnProperty(2);
-  const {fullName, appName} = await getNamesFromGit();
+  const { fullName, appName } = await getNamesFromGit();
 
   /* Get Heroku authentication token from the Heroku CLI. */
   const herokuTokenOut = await getOutputFromCommand('heroku', ['auth:token']);
