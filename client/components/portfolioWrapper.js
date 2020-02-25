@@ -4,22 +4,22 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import SingleTransaction from './singleTransaction';
+import SinglePortfolioRow from './singlePortfolioRow';
 
-const transactionsDummy = [
-  {action: 'SELL', amount: 2, paidPerShare: 6000, ticker: 'AAPL'},
-  {action: 'BUY', amount: 5, paidPerShare: 5000, ticker: 'MSFT'},
-  {action: 'BUY', amount: 37, paidPerShare: 7800, ticker: 'GOOGL'}
+const portfolioDummy = [
+  {amount: 2, curPrice: 6000, ticker: 'AAPL'},
+  {amount: 5, curPrice: 5000, ticker: 'MSFT'},
+  {amount: 37, curPrice: 7800, ticker: 'GOOGL'}
 ];
 /**
  * COMPONENT
  */
-export default class TransactionsWrapper extends React.Component {
+export default class PortfolioWrapper extends React.Component {
   constructor(props) {
     super(props);
   }
   componentDidMount() {
-    console.log('transactions wrapper mounted');
+    console.log('portfolio wrapper mounted');
   }
   render() {
     const classes = {
@@ -28,22 +28,21 @@ export default class TransactionsWrapper extends React.Component {
       }
     };
     return (
-      <div id="transactions-list-wrapper">
-        <div id="transactions-list-header">
-          <h1>Transactions</h1>
+      <div id="portfolio-list-wrapper">
+        <div id="portfolio-list-header">
+          <h1>Portfolio</h1>
         </div>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Ticker symbol</TableCell>
-              <TableCell align="right">Action</TableCell>
               <TableCell align="right">Number of stocks</TableCell>
-              <TableCell align="right">Total price</TableCell>
+              <TableCell align="right">Total worth</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {transactionsDummy.map((row, idx) => (
-              <SingleTransaction key={idx} row={row} />
+            {portfolioDummy.map((row, idx) => (
+              <SinglePortfolioRow key={idx} row={row} />
             ))}
           </TableBody>
         </Table>
@@ -52,3 +51,9 @@ export default class TransactionsWrapper extends React.Component {
     );
   }
 }
+
+/*
+            {portfolioDummy.map((row, idx) => (
+              <SingleTransaction key={idx} row={row} />
+            ))}
+            */
