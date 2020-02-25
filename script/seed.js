@@ -19,6 +19,31 @@ async function seed() {
 
   console.log(`seeded ${users.length} users`);
 
+  const curStockPrices = await Promise.all([
+    CurStockPrice.create({
+      ticker: 'GOOGL',
+      pricePerStock: 150000,
+      companyName: 'Alphabet'
+    }),
+    CurStockPrice.create({
+      ticker: 'AAPL',
+      pricePerStock: 40000,
+      companyName: 'Apple'
+    }),
+    CurStockPrice.create({
+      ticker: 'AMZN',
+      pricePerStock: 150000,
+      companyName: 'Amazon'
+    }),
+    CurStockPrice.create({
+      ticker: 'NFLX',
+      pricePerStock: 36500,
+      companyName: 'Netflix'
+    })
+  ]);
+
+  console.log(`seeded ${curStockPrices.length} curStockPrices`);
+
   const transactions = await Promise.all([
     Transaction.create({
       action: 'BUY',
@@ -65,31 +90,6 @@ async function seed() {
   ]);
 
   console.log(`seeded ${transactions.length} transactions`);
-
-  const curStockPrices = await Promise.all([
-    CurStockPrice.create({
-      ticker: 'GOOGL',
-      pricePerStock: 150000,
-      companyName: 'Alphabet'
-    }),
-    CurStockPrice.create({
-      ticker: 'AAPL',
-      pricePerStock: 40000,
-      companyName: 'Apple'
-    }),
-    CurStockPrice.create({
-      ticker: 'AMZN',
-      pricePerStock: 150000,
-      companyName: 'Amazon'
-    }),
-    CurStockPrice.create({
-      ticker: 'NFLX',
-      pricePerStock: 36500,
-      companyName: 'Netflix'
-    })
-  ]);
-
-  console.log(`seeded ${curStockPrices.length} curStockPrices`);
 
   const ownedStocks = await Promise.all([
     OwnedStock.create({ curStockPriceId: 1, quantity: 35, userId: 1 }),
