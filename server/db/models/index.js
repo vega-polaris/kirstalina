@@ -1,7 +1,7 @@
 const User = require('./user');
 const OwnedStock = require('./ownedStock');
-const Ticker = require('./ticker');
 const Transaction = require('./transaction');
+const CurStockPrice = require('./curStockPrice');
 
 /*
  Associations
@@ -16,6 +16,12 @@ User.hasMany(OwnedStock);
 OwnedStock.belongsTo(User);
 User.hasMany(OwnedStock);
 
+OwnedStock.belongsTo(CurStockPrice);
+CurStockPrice.hasMany(OwnedStock);
+
+Transaction.belongsTo(CurStockPrice);
+CurStockPrice.hasMany(Transaction);
+
 /**
  * We'll export all of our models here, so that any time a module needs a model,
  * we can just require it from 'db/models'
@@ -25,6 +31,6 @@ User.hasMany(OwnedStock);
 module.exports = {
   User,
   OwnedStock,
-  Ticker,
-  Transaction
+  Transaction,
+  CurStockPrice
 };

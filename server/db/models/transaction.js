@@ -5,7 +5,7 @@ const Transaction = db.define('transaction', {
   action: {
     type: Sequelize.ENUM('BUY', 'SELL')
   },
-  amount: {
+  quantity: {
     type: Sequelize.INTEGER,
     defaultValue: 1
   },
