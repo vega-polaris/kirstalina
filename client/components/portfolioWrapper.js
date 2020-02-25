@@ -36,7 +36,7 @@ export default class PortfolioWrapper extends React.Component {
         <div id="portfolio-list-header">
           <h1>Portfolio</h1>
         </div>
-        <Table className={classes.table} aria-label="simple table">
+        <Table className="table" aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Ticker symbol</TableCell>
