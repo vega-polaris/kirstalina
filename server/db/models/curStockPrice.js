@@ -13,6 +13,11 @@ const CurStockPrice = db.define('curStockPrice', {
   companyName: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  availableShares: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    defaultValue: 10000
   }
 });
 

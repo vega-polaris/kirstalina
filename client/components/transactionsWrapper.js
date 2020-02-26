@@ -5,21 +5,18 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import SingleTransaction from './singleTransaction';
+import { getUserTransactionsThunkCreator } from '../store';
+import { connect } from 'react-redux';
 
-const transactionsDummy = [
-  {action: 'SELL', amount: 2, paidPerShare: 6000, ticker: 'AAPL'},
-  {action: 'BUY', amount: 5, paidPerShare: 5000, ticker: 'MSFT'},
-  {action: 'BUY', amount: 37, paidPerShare: 7800, ticker: 'GOOGL'}
-];
 /**
  * COMPONENT
  */
-export default class TransactionsWrapper extends React.Component {
+export class UnconnectedTransactionsWrapper extends React.Component {
   constructor(props) {
     super(props);
   }
   componentDidMount() {
-    console.log('transactions wrapper mounted');
+    this.props.getUserTransactions(this.props.user.id);
   }
   render() {
     const classes = {
@@ -27,6 +24,7 @@ export default class TransactionsWrapper extends React.Component {
         minWidth: 650
       }
     };
+    console.log(this.props, 'props in transactions wrapper');
     return (
       <div id="transactions-list-wrapper">
         <div id="transactions-list-header">
@@ -38,13 +36,17 @@ export default class TransactionsWrapper extends React.Component {
               <TableCell>Ticker symbol</TableCell>
               <TableCell align="right">Action</TableCell>
               <TableCell align="right">Number of stocks</TableCell>
-              <TableCell align="right">Total price</TableCell>
+              <TableCell align="right">Total paid</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {transactionsDummy.map((row, idx) => (
-              <SingleTransaction key={idx} row={row} />
-            ))}
+            {this.props.transactions ? (
+              this.props.transactions.map((row, idx) => (
+                <SingleTransaction key={idx} row={row} />
+              ))
+            ) : (
+              <TableRow />
+            )}
           </TableBody>
         </Table>
         <hr />
@@ -52,3 +54,26 @@ export default class TransactionsWrapper extends React.Component {
     );
   }
 }
+
+// once the fetch transactions thunk has been created, put its result into this component's props
+const mapStateToProps = function(state) {
+  return {
+    transactions: state.transactions.transactions,
+    user: state.user
+  };
+};
+
+// make thunk creator accessible and trigger it on component did mount
+const mapDispatchToProps = function(dispatch) {
+  return {
+    getUserTransactions: userId =>
+      dispatch(getUserTransactionsThunkCreator(userId))
+  };
+};
+
+const connectedTransactionsWrapper = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UnconnectedTransactionsWrapper);
+
+export default connectedTransactionsWrapper;
