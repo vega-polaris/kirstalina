@@ -6,28 +6,27 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import SinglePortfolioRow from './singlePortfolioRow';
 import BuyStocksWrapper from './buyStocksWrapper';
+import { connect } from 'react-redux';
+import { getPortfolioThunkCreator } from '../store';
 
-const portfolioDummy = [
-  { amount: 2, curPrice: 6000, ticker: 'AAPL' },
-  { amount: 5, curPrice: 5000, ticker: 'MSFT' },
-  { amount: 37, curPrice: 7800, ticker: 'GOOGL' }
-];
+// const portfolioDummy = [
+//   { amount: 2, curPrice: 6000, ticker: "AAPL" },
+//   { amount: 5, curPrice: 5000, ticker: "MSFT" },
+//   { amount: 37, curPrice: 7800, ticker: "GOOGL" }
+// ];
+
 /**
  * COMPONENT
  */
-export default class PortfolioWrapper extends React.Component {
+export class UnconnectedPortfolioWrapper extends React.Component {
   constructor(props) {
     super(props);
   }
   componentDidMount() {
-    console.log('portfolio wrapper mounted');
+    this.props.getPortfolio(this.props.user.id);
   }
+
   render() {
-    const classes = {
-      table: {
-        minWidth: 650
-      }
-    };
     return (
       <div id="portfolio-page-wrapper">
         <div id="buy-stocks-placeholder">
@@ -45,9 +44,13 @@ export default class PortfolioWrapper extends React.Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {portfolioDummy.map((row, idx) => (
-              <SinglePortfolioRow key={idx} row={row} />
-            ))}
+            {this.props.portfolio ? (
+              this.props.portfolio.map((row, idx) => (
+                <SinglePortfolioRow key={idx} row={row} />
+              ))
+            ) : (
+              <TableRow />
+            )}
           </TableBody>
         </Table>
         <hr />
@@ -55,3 +58,25 @@ export default class PortfolioWrapper extends React.Component {
     );
   }
 }
+
+// once the fetch transactions thunk has been created, put its result into this component's props
+const mapStateToProps = function(state) {
+  return {
+    portfolio: state.portfolio.portfolio,
+    user: state.user
+  };
+};
+
+// make thunk creator accessible and trigger it on component did mount
+const mapDispatchToProps = function(dispatch) {
+  return {
+    getPortfolio: userId => dispatch(getPortfolioThunkCreator(userId))
+  };
+};
+
+const connectedPortfolioWrapper = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UnconnectedPortfolioWrapper);
+
+export default connectedPortfolioWrapper;

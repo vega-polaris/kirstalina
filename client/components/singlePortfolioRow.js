@@ -7,10 +7,12 @@ const SinglePortfolioRow = props => {
   return (
     <TableRow>
       <TableCell component="th" scope="row">
-        {row.ticker}
+        {row.curStockPrice.ticker}
       </TableCell>
-      <TableCell align="right">{row.amount}</TableCell>
-      <TableCell align="right">{row.curPrice * 0.001 * row.amount}</TableCell>
+      <TableCell align="right">{row.quantity}</TableCell>
+      <TableCell align="right">
+        {row.curStockPrice.pricePerStock * 0.001 * row.quantity}
+      </TableCell>
     </TableRow>
   );
 };
