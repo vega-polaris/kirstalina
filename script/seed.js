@@ -23,22 +23,26 @@ async function seed() {
     CurStockPrice.create({
       ticker: 'GOOGL',
       pricePerStock: 150000,
-      companyName: 'Alphabet'
+      companyName: 'Alphabet',
+      availableShares: 70000
     }),
     CurStockPrice.create({
       ticker: 'AAPL',
       pricePerStock: 40000,
-      companyName: 'Apple'
+      companyName: 'Apple',
+      availableShares: 60000
     }),
     CurStockPrice.create({
       ticker: 'AMZN',
       pricePerStock: 150000,
-      companyName: 'Amazon'
+      companyName: 'Amazon',
+      availableShares: 40000
     }),
     CurStockPrice.create({
       ticker: 'NFLX',
       pricePerStock: 36500,
-      companyName: 'Netflix'
+      companyName: 'Netflix',
+      availableShares: 70027
     })
   ]);
 
